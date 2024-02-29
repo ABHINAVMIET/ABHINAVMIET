@@ -10,7 +10,7 @@
 
 - 🌱 I’m currently learning **SQL,JS**
 
-- 💬 Ask me about **JAVA ,DSA,HTML AND CSS**
+- 💬 Ask me about **JAVA,OOPS,DSA,HTML AND CSS**
 
 - 📫 How to reach me **abhinavchauhan591@gmail.com**
 
