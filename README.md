@@ -8,7 +8,7 @@
 
 <p align="left"> <a href="https://twitter.com/itsabhinavchauhan" target="blank"><img src="https://img.shields.io/twitter/follow/itsabhinavchauhan?logo=twitter&style=for-the-badge" alt="itsabhinavchauhan" /></a> </p>
 
-- 🌱 I’m currently learning **SQL,JS**
+- 🌱 I’m currently learning **SQL,JS,DOTNET,C#**
 
 - 💬 Ask me about **JAVA,OOPS,DSA,HTML AND CSS**
 
