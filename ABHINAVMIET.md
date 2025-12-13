@@ -17,7 +17,7 @@
 
 - 🌱 I’m currently using Advanced JMeter, Fiddler, SQL, CI/CD, Grafana**
 
--💬 Ask me about JMeter, Load Testing, Stress Testing, Correlation, Throughput, Response Time** 
+- 💬 Ask me about JMeter, Load Testing, Stress Testing, Correlation, Throughput, Response Time** 
 
 - 📫 How to reach me **abhinavchauhan591@gmail.com**
 
