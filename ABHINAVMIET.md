@@ -6,7 +6,7 @@
 
 <p align="left"> <img src="https://komarev.com/ghpvc/?username=abhinavmiet&label=Profile%20views&color=0e75b6&style=flat" alt="abhinavmiet" /> </p>
 
-<p align="left"> <a href="https://www.linkedin.com/in/abhinav-chauhan-758a7a224" target="blank"><img src="https://www.linkedin.com/in/abhinav-chauhan-758a7a224" alt="Abhinav chauhan" /></a> </p>
+<p align="left"> <a href="https://www.linkedin.com/in/abhinav-chauhan-758a7a224" target="blank"><img src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/linked-in-alt.svg" alt="Abhinav chauhan" /></a> </p>
 
 - 🔭 I work as a Performance Test Engineer focusing on API & Web applications**
 
