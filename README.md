@@ -97,4 +97,9 @@
 
 <p><img align="left" src="https://github-readme-stats.vercel.app/api/top-langs?username=abhinavmiet&show_icons=true&locale=en&layout=compact" alt="abhinavmiet" /></p>
 
-<p><img align="center" src="https://github-readme-streak-stats.herokuapp.com/?user=abhinavmiet&" alt="abhinavmiet" /></p>
+<p>
+  <img align="center"
+       src="https://streak-stats.demolab.com?user=abhinavmiet"
+       alt="GitHub Streak Stats" />
+</p>
+
