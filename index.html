@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Abhinav — AI Performance Engineer</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #0b0e14;
+    --surface: #12161f;
+    --surface2: #1a1f2e;
+    --border: rgba(99,210,190,0.15);
+    --border2: rgba(99,210,190,0.3);
+    --accent: #63d2be;
+    --accent2: #4fa8f5;
+    --accent3: #f5a623;
+    --text: #e8eaf0;
+    --muted: #7a8199;
+    --tag-bg: rgba(99,210,190,0.1);
+    --tag-text: #63d2be;
+    --mono: 'Space Mono', monospace;
+    --sans: 'DM Sans', sans-serif;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--sans);
+    font-size: 15px;
+    line-height: 1.7;
+    min-height: 100vh;
+  }
+
+  /* NAV */
+  nav {
+    position: sticky; top: 0; z-index: 100;
+    background: rgba(11,14,20,0.92);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 2rem; height: 60px;
+  }
+  .nav-logo { font-family: var(--mono); font-size: 14px; color: var(--accent); letter-spacing: 2px; }
+  .nav-links { display: flex; gap: 2rem; }
+  .nav-links a { color: var(--muted); text-decoration: none; font-size: 13px; letter-spacing: 1px; text-transform: uppercase; transition: color .2s; }
+  .nav-links a:hover { color: var(--accent); }
+
+  /* HERO */
+  .hero {
+    min-height: 92vh;
+    display: flex; flex-direction: column; justify-content: center;
+    padding: 4rem 2rem 3rem;
+    max-width: 900px; margin: 0 auto;
+  }
+  .hero-tag {
+    font-family: var(--mono); font-size: 11px; color: var(--accent);
+    letter-spacing: 3px; text-transform: uppercase; margin-bottom: 1.5rem;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .hero-tag::before { content: ''; width: 28px; height: 1px; background: var(--accent); }
+
+  .hero h1 {
+    font-family: var(--mono); font-size: clamp(2.2rem, 5vw, 4rem);
+    font-weight: 700; line-height: 1.1; margin-bottom: 1rem;
+    letter-spacing: -1px;
+  }
+  .hero h1 span { color: var(--accent); }
+
+  .hero-sub {
+    font-size: 1.1rem; color: var(--muted); max-width: 560px;
+    line-height: 1.8; margin-bottom: 2rem;
+  }
+
+  .cta-row { display: flex; gap: 1rem; flex-wrap: wrap; margin-bottom: 3rem; }
+  .btn {
+    font-family: var(--mono); font-size: 12px; letter-spacing: 1.5px;
+    text-transform: uppercase; text-decoration: none; padding: 10px 22px;
+    border-radius: 4px; transition: all .2s; display: inline-flex; align-items: center; gap: 8px;
+  }
+  .btn-primary { background: var(--accent); color: var(--bg); font-weight: 700; }
+  .btn-primary:hover { background: #85e0d0; }
+  .btn-outline { border: 1px solid var(--border2); color: var(--accent); }
+  .btn-outline:hover { background: var(--tag-bg); }
+
+  .hero-stats {
+    display: flex; gap: 2.5rem; flex-wrap: wrap;
+    border-top: 1px solid var(--border); padding-top: 2rem;
+  }
+  .stat-num { font-family: var(--mono); font-size: 1.6rem; color: var(--accent); font-weight: 700; }
+  .stat-label { font-size: 12px; color: var(--muted); letter-spacing: 1px; text-transform: uppercase; }
+
+  /* SECTIONS */
+  section { padding: 5rem 2rem; max-width: 900px; margin: 0 auto; }
+  .section-header { margin-bottom: 3rem; }
+  .section-num { font-family: var(--mono); font-size: 11px; color: var(--accent); letter-spacing: 3px; text-transform: uppercase; margin-bottom: .5rem; }
+  .section-title { font-family: var(--mono); font-size: 1.6rem; font-weight: 700; }
+
+  /* AI FOCUS BANNER */
+  .ai-banner {
+    background: linear-gradient(135deg, rgba(99,210,190,0.08) 0%, rgba(79,168,245,0.08) 100%);
+    border: 1px solid var(--border2);
+    border-radius: 12px; padding: 2rem;
+    margin: 0 auto 4rem; max-width: 860px;
+    display: flex; gap: 1.5rem; align-items: flex-start;
+  }
+  .ai-banner-icon { font-size: 2rem; flex-shrink: 0; }
+  .ai-banner-text h3 { font-family: var(--mono); font-size: 1rem; color: var(--accent); margin-bottom: .4rem; }
+  .ai-banner-text p { color: var(--muted); font-size: 14px; line-height: 1.7; }
+
+  /* PROJECTS */
+  .projects-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+  .project-card {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 10px; padding: 1.5rem;
+    transition: border-color .2s, transform .2s;
+    position: relative; overflow: hidden;
+  }
+  .project-card::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+    background: var(--accent); opacity: 0; transition: opacity .2s;
+  }
+  .project-card:hover { border-color: var(--border2); transform: translateY(-2px); }
+  .project-card:hover::before { opacity: 1; }
+  .project-card.featured { border-color: rgba(99,210,190,0.35); }
+  .project-card.featured::before { opacity: 1; }
+
+  .project-badge {
+    display: inline-block; font-family: var(--mono); font-size: 10px;
+    letter-spacing: 2px; text-transform: uppercase; padding: 3px 10px;
+    border-radius: 20px; margin-bottom: .8rem;
+    background: var(--tag-bg); color: var(--tag-text);
+  }
+  .project-badge.ai { background: rgba(79,168,245,0.1); color: var(--accent2); }
+  .project-badge.new { background: rgba(245,166,35,0.12); color: var(--accent3); }
+
+  .project-title { font-family: var(--mono); font-size: 1rem; font-weight: 700; margin-bottom: .5rem; }
+  .project-desc { font-size: 13.5px; color: var(--muted); line-height: 1.65; margin-bottom: 1rem; }
+  .project-stack { display: flex; flex-wrap: wrap; gap: 6px; }
+  .stack-tag {
+    font-size: 11px; font-family: var(--mono); padding: 3px 8px;
+    background: var(--surface2); border: 1px solid var(--border);
+    border-radius: 3px; color: var(--muted);
+  }
+
+  /* EXPERIENCE */
+  .timeline { position: relative; }
+  .timeline::before {
+    content: ''; position: absolute; left: 7px; top: 6px; bottom: 0;
+    width: 1px; background: var(--border);
+  }
+  .timeline-item { padding-left: 2.5rem; position: relative; margin-bottom: 2.5rem; }
+  .timeline-dot {
+    position: absolute; left: 0; top: 6px;
+    width: 15px; height: 15px; border-radius: 50%;
+    border: 2px solid var(--accent); background: var(--bg);
+  }
+  .timeline-dot.active { background: var(--accent); }
+  .timeline-date { font-family: var(--mono); font-size: 11px; color: var(--accent); letter-spacing: 1px; margin-bottom: .3rem; }
+  .timeline-role { font-size: 1rem; font-weight: 600; margin-bottom: .2rem; }
+  .timeline-company { font-size: 13px; color: var(--muted); margin-bottom: .8rem; }
+  .timeline-desc { font-size: 13.5px; color: var(--muted); line-height: 1.7; }
+  .timeline-chips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: .8rem; }
+
+  /* SKILLS */
+  .skills-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+  .skill-group { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 1.2rem 1.5rem; }
+  .skill-group-title { font-family: var(--mono); font-size: 11px; color: var(--accent); letter-spacing: 2px; text-transform: uppercase; margin-bottom: .8rem; }
+  .skill-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+  .skill-tag { font-size: 12px; font-family: var(--mono); padding: 4px 10px; background: var(--surface2); border: 1px solid var(--border); border-radius: 3px; color: var(--text); }
+
+  /* ACHIEVEMENTS */
+  .ach-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  .ach-card { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 1rem 1.2rem; display: flex; gap: 12px; align-items: flex-start; }
+  .ach-icon { font-size: 1.2rem; flex-shrink: 0; }
+  .ach-text { font-size: 13px; color: var(--muted); line-height: 1.5; }
+  .ach-text strong { color: var(--text); display: block; margin-bottom: 2px; font-size: 13.5px; }
+
+  /* CONTACT */
+  .contact-grid { display: flex; flex-wrap: wrap; gap: 1rem; }
+  .contact-card {
+    background: var(--surface); border: 1px solid var(--border); border-radius: 8px;
+    padding: .9rem 1.4rem; display: flex; align-items: center; gap: 10px;
+    text-decoration: none; color: var(--text); transition: border-color .2s;
+    font-size: 14px;
+  }
+  .contact-card:hover { border-color: var(--border2); color: var(--accent); }
+  .contact-icon { font-size: 1rem; color: var(--accent); }
+
+  /* FOOTER */
+  footer {
+    text-align: center; padding: 2.5rem 1rem;
+    border-top: 1px solid var(--border);
+    font-family: var(--mono); font-size: 12px; color: var(--muted);
+    letter-spacing: 1px;
+  }
+
+  @media (max-width: 640px) {
+    .projects-grid, .skills-grid, .ach-grid { grid-template-columns: 1fr; }
+    .hero h1 { font-size: 2rem; }
+    nav { padding: 0 1rem; }
+    .nav-links { gap: 1rem; }
+    .nav-links a { font-size: 11px; }
+    .ai-banner { flex-direction: column; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">ABHINAV</div>
+  <div class="nav-links">
+    <a href="#about">About</a>
+    <a href="#projects">Projects</a>
+    <a href="#experience">Experience</a>
+    <a href="#skills">Skills</a>
+    <a href="#contact">Contact</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="hero" id="about">
+  <div class="hero-tag">Available for AI Development Roles</div>
+  <h1>Hi, I'm <span>Abhinav</span><br>AI Performance<br>Engineer</h1>
+  <p class="hero-sub">
+    I stress-test LLM inference pipelines, RAG agents, and multi-service GenAI systems at scale — and I'm ready to build them too. Based in Noida, India, actively seeking to join an <strong style="color:var(--accent)">AI Development Team</strong>.
+  </p>
+  <div class="cta-row">
+    <a href="mailto:abhinavchauhan591@gmail.com" class="btn btn-primary">Get in Touch →</a>
+    <a href="https://www.linkedin.com/in/abhinav-chauhan-758a7a224/" target="_blank" class="btn btn-outline">LinkedIn ↗</a>
+  </div>
+  <div class="hero-stats">
+    <div class="stat"><div class="stat-num">3+</div><div class="stat-label">GenAI Products Tested</div></div>
+    <div class="stat"><div class="stat-num">20B</div><div class="stat-label">Parameter LLMs</div></div>
+    <div class="stat"><div class="stat-num">400+</div><div class="stat-label">LeetCode Problems</div></div>
+    <div class="stat"><div class="stat-num">H100</div><div class="stat-label">GPU Infra Experience</div></div>
+  </div>
+</div>
+
+<!-- AI BANNER -->
+<div class="ai-banner">
+  <div class="ai-banner-icon">🤖</div>
+  <div class="ai-banner-text">
+    <h3>Why I Want to Join an AI Development Team</h3>
+    <p>Having spent 1.5+ years deep inside production GenAI systems — benchmarking RAG pipelines, profiling LLM inference on H100 GPUs, and mapping bottlenecks across 6-service microservice chains — I've developed an intimate understanding of how AI systems fail under pressure. I want to move from testing these systems to building them. My performance engineering lens gives me a rare edge: I design for reliability and scale from day one.</p>
+  </div>
+</div>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="section-header">
+    <div class="section-num">// 01 — Projects</div>
+    <div class="section-title">Things I've Built</div>
+  </div>
+  <div class="projects-grid">
+
+    <div class="project-card featured">
+      <div class="project-badge ai">AI Agent</div>
+      <div class="project-title">BusinessNext Doc Agent</div>
+      <div class="project-desc">An AI-powered documentation assistant for architecture & API docs. Upload PDFs and ask questions — the agent returns precise, cited answers. Built with RAG, streaming responses, and a clean dark UI.</div>
+      <div class="project-stack">
+        <span class="stack-tag">RAG</span>
+        <span class="stack-tag">LLM</span>
+        <span class="stack-tag">PDF Parsing</span>
+        <span class="stack-tag">Python</span>
+        <span class="stack-tag">Streamlit</span>
+      </div>
+    </div>
+
+    <div class="project-card featured">
+      <div class="project-badge new">New</div>
+      <div class="project-title">Kubasset</div>
+      <div class="project-desc">Kubernetes asset management and observability tool. Provides visibility into cluster resources, tracks deployments, and surfaces performance metrics — bridging the gap between infra and AI workload monitoring.</div>
+      <div class="project-stack">
+        <span class="stack-tag">Kubernetes</span>
+        <span class="stack-tag">K8s API</span>
+        <span class="stack-tag">Observability</span>
+        <span class="stack-tag">Python</span>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <div class="project-badge">Java</div>
+      <div class="project-title">Advanced PDF to Audio Converter</div>
+      <div class="project-desc">Java-based accessibility tool that converts PDF documents into audio output, improving document accessibility for visually impaired users.</div>
+      <div class="project-stack">
+        <span class="stack-tag">Java</span>
+        <span class="stack-tag">Apache PDFBox</span>
+        <span class="stack-tag">FreeTTS</span>
+        <span class="stack-tag">Swing</span>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <div class="project-badge">Full Stack</div>
+      <div class="project-title">HR Management System</div>
+      <div class="project-desc">Full-stack employee management application covering records, attendance, and payroll — designed with a desktop GUI and relational database backend.</div>
+      <div class="project-stack">
+        <span class="stack-tag">Java Swing</span>
+        <span class="stack-tag">AWT</span>
+        <span class="stack-tag">MySQL</span>
+        <span class="stack-tag">IntelliJ</span>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <div class="project-badge">Database</div>
+      <div class="project-title">SQL — Library & E-Commerce DBs</div>
+      <div class="project-desc">Designed relational database schemas with full transaction flows: checkout, inventory management, and order tracking for both library and e-commerce domains.</div>
+      <div class="project-stack">
+        <span class="stack-tag">SQL</span>
+        <span class="stack-tag">DBMS</span>
+        <span class="stack-tag">Schema Design</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="section-header">
+    <div class="section-num">// 02 — Experience</div>
+    <div class="section-title">Where I've Worked</div>
+  </div>
+  <div class="timeline">
+
+    <div class="timeline-item">
+      <div class="timeline-dot active"></div>
+      <div class="timeline-date">JAN 2026 — PRESENT</div>
+      <div class="timeline-role">Junior Engineer — AI Performance Testing</div>
+      <div class="timeline-company">BUSINESSNEXT · Noida, India</div>
+      <div class="timeline-desc">
+        Promoted after demonstrating ownership of end-to-end AI performance validation across three production GenAI products (AgentNext, WorkNext, Gen EmailBot) running on Nebius H100 GPUs with a 20B-parameter LLM. Leading independent performance test cycles, driving proactive reviews across gRPC, REST, and Milvus vector search layers to preempt SLA breaches.
+      </div>
+      <div class="timeline-chips">
+        <span class="stack-tag">AgentNext</span><span class="stack-tag">WorkNext</span><span class="stack-tag">Gen EmailBot</span><span class="stack-tag">H100 GPUs</span><span class="stack-tag">Milvus</span>
+      </div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-date">JAN 2025 — JAN 2026</div>
+      <div class="timeline-role">Apprentice — AI Performance Test Engineer</div>
+      <div class="timeline-company">BUSINESSNEXT · Noida, India</div>
+      <div class="timeline-desc">
+        Owned end-to-end performance validation of three production GenAI products. Designed load tests across a 6-service microservice chain for AgentNext (RAG-powered), benchmarked LLM inference latency for WorkNext (AI summarization), and tested full email pipeline throughput for Gen EmailBot including Milvus RAG and zero-shot NLU classification.
+      </div>
+      <div class="timeline-chips">
+        <span class="stack-tag">JMeter</span><span class="stack-tag">gRPC</span><span class="stack-tag">REST</span><span class="stack-tag">Grafana</span><span class="stack-tag">OpenTelemetry</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="section-header">
+    <div class="section-num">// 03 — Skills</div>
+    <div class="section-title">Technical Arsenal</div>
+  </div>
+  <div class="skills-grid">
+    <div class="skill-group">
+      <div class="skill-group-title">AI & LLM</div>
+      <div class="skill-tags">
+        <span class="skill-tag">LLM Benchmarking</span>
+        <span class="skill-tag">RAG Pipelines</span>
+        <span class="skill-tag">Vector DB</span>
+        <span class="skill-tag">Milvus</span>
+        <span class="skill-tag">Prompt Latency</span>
+        <span class="skill-tag">GPU Infra</span>
+      </div>
+    </div>
+    <div class="skill-group">
+      <div class="skill-group-title">Performance Testing</div>
+      <div class="skill-tags">
+        <span class="skill-tag">Apache JMeter</span>
+        <span class="skill-tag">Fiddler Classic</span>
+        <span class="skill-tag">Load Testing</span>
+        <span class="skill-tag">Stress Testing</span>
+        <span class="skill-tag">Spike Testing</span>
+      </div>
+    </div>
+    <div class="skill-group">
+      <div class="skill-group-title">Observability</div>
+      <div class="skill-tags">
+        <span class="skill-tag">Grafana</span>
+        <span class="skill-tag">Kibana</span>
+        <span class="skill-tag">Zabbix</span>
+        <span class="skill-tag">OpenTelemetry</span>
+      </div>
+    </div>
+    <div class="skill-group">
+      <div class="skill-group-title">Languages & Frameworks</div>
+      <div class="skill-tags">
+        <span class="skill-tag">Java</span>
+        <span class="skill-tag">Python</span>
+        <span class="skill-tag">SQL</span>
+        <span class="skill-tag">Spring Boot</span>
+        <span class="skill-tag">Sanic</span>
+        <span class="skill-tag">gRPC</span>
+        <span class="skill-tag">REST</span>
+      </div>
+    </div>
+    <div class="skill-group">
+      <div class="skill-group-title">Databases</div>
+      <div class="skill-tags">
+        <span class="skill-tag">MySQL</span>
+        <span class="skill-tag">MongoDB</span>
+        <span class="skill-tag">ClickHouse</span>
+        <span class="skill-tag">Milvus</span>
+        <span class="skill-tag">SQL Server</span>
+      </div>
+    </div>
+    <div class="skill-group">
+      <div class="skill-group-title">Cloud & DevOps</div>
+      <div class="skill-tags">
+        <span class="skill-tag">AWS S3</span>
+        <span class="skill-tag">Azure DevOps</span>
+        <span class="skill-tag">Jenkins</span>
+        <span class="skill-tag">Rancher</span>
+        <span class="skill-tag">Kubernetes</span>
+        <span class="skill-tag">CI/CD</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ACHIEVEMENTS -->
+<section>
+  <div class="section-header">
+    <div class="section-num">// 04 — Achievements</div>
+    <div class="section-title">Certifications & Milestones</div>
+  </div>
+  <div class="ach-grid">
+    <div class="ach-card"><div class="ach-icon">🏆</div><div class="ach-text"><strong>400+ LeetCode Problems</strong>Consistent algorithmic problem-solving practice</div></div>
+    <div class="ach-card"><div class="ach-icon">⭐</div><div class="ach-text"><strong>HackerRank 5-Star Java</strong>+ Software Engineer Intern Certificate</div></div>
+    <div class="ach-card"><div class="ach-icon">☁️</div><div class="ach-text"><strong>Microsoft AZ-900</strong>Azure Fundamentals Certified</div></div>
+    <div class="ach-card"><div class="ach-icon">⚡</div><div class="ach-text"><strong>Microsoft PL-900</strong>Power Platform Fundamentals Certified</div></div>
+    <div class="ach-card"><div class="ach-icon">🤖</div><div class="ach-text"><strong>ChatGPT for Coders</strong>Great Learning — AI tooling for development</div></div>
+    <div class="ach-card"><div class="ach-icon">🔐</div><div class="ach-text"><strong>Cybersecurity Fundamentals</strong>Certified in security best practices</div></div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-header">
+    <div class="section-num">// 05 — Contact</div>
+    <div class="section-title">Let's Build Something</div>
+  </div>
+  <p style="color:var(--muted); max-width:520px; margin-bottom: 2rem; font-size:15px; line-height:1.8;">
+    I'm actively looking to join an <span style="color:var(--accent); font-weight:600">AI Development Team</span>. If you're building LLM-powered products, GenAI agents, or RAG systems — let's talk.
+  </p>
+  <div class="contact-grid">
+    <a class="contact-card" href="mailto:abhinavchauhan591@gmail.com">
+      <span class="contact-icon">✉</span> abhinavchauhan591@gmail.com
+    </a>
+    <a class="contact-card" href="tel:+918445669559">
+      <span class="contact-icon">📞</span> +91 84456 69559
+    </a>
+    <a class="contact-card" href="https://www.linkedin.com/in/abhinav-chauhan-758a7a224/" target="_blank">
+      <span class="contact-icon">🔗</span> linkedin.com/in/abhinav-chauhan
+    </a>
+    <a class="contact-card" href="https://www.hackerrank.com/profile/abhinavchauhan53" target="_blank">
+      <span class="contact-icon">💻</span> HackerRank Profile
+    </a>
+    <a class="contact-card" href="https://leetcode.com/u/Abhinavchauhan18/" target="_blank">
+      <span class="contact-icon">⚡</span> LeetCode Profile
+    </a>
+  </div>
+</section>
+
+<footer>
+  <p>Abhinav · AI Performance Engineer → AI Developer · Noida, India · 2025</p>
+  <p style="margin-top:6px; font-size:11px;">Open to AI Development, MLOps, LLM Engineering, and Backend AI roles</p>
+</footer>
+
+</body>
+</html>
